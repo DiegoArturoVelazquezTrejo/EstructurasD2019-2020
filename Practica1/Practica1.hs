@@ -40,3 +40,13 @@ eliminaAuxAbstract (x:xs) = (eliminaAux x xs)
 elimina :: [(Int, Int)] -> [(Int, Int)]
 elimina [] = []
 elimina (x:xs)= [x]++ elimina(eliminaAuxAbstract (x:xs))
+
+-- Selection Sort
+sort :: [Int] -> [Int]
+sort [] = []
+sort (x:xs) =  [head (obtenerMinimo (x:xs))] ++ sort (tail (obtenerMinimo (x:xs)))
+
+-- obtenerMinimo recibe una lista y regresa el mínimo
+obtenerMinimo :: [Int] -> [Int]
+obtenerMinimo [e] = [e]
+obtenerMinimo (x:xs) = if(x > head xs && length xs > 0) then (obtenerMinimo xs)++[x] else obtenerMinimo ([x] ++ (tail xs))++[head xs]
