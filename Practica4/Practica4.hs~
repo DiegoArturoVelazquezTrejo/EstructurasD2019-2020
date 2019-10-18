@@ -1,0 +1,45 @@
+module Practica5 where
+
+-- Dato para representar expresiones aritméticas
+data EA = N Int | Var String | Pos EA | Neg EA | Sum EA EA | Res EA EA | Mult EA EA | Div EA EA | Modulo EA EA | Pot EA EA deriving (Eq,Show)
+
+{-- Ejercicio 7 --
+instance Show EA where
+-}
+
+-- Ejercicio 1: Operador binario --
+pasarsumaEA :: Int -> Int -> EA
+pasarsumaEA a b = Sum (N a) (N b)
+
+-- Ejercicio 2 --
+pasarrestaEA :: Int -> Int -> EA
+pasarrestaEA a b = Res (N a) (N b)
+
+-- Ejercicio 3 --
+pasarmultEA :: Int -> Int -> EA
+pasarmultEA a b = Mult (N a) (N b)
+
+-- Ejercicio 4 --
+pasardivEA :: Int -> Int -> EA
+pasardivEA a b = Div (N a) (N b) 
+
+-- Ejercicio 5 --
+pasarmoduloEA :: Int -> Int -> EA
+pasarmoduloEA a b = Modulo (N a) (N b) 
+
+-- Ejercicio 6 --
+pasarpotEA :: Int -> Int -> EA
+pasarpotEA a b= Pot (N a) (N b)
+
+-- Ejercicio 8: Operadores unarios --
+mayorqueUnario :: EA -> EA -> Bool
+mayorqueUnario (Pos (N a)) (Neg (N b)) = a>b  
+
+-- Ejercicio 9: Evaluacion --
+--eval (Res (Sum (Sum (N 2) (Mult (N 3) (N 9))) (Mult (N 4) (N 2))) (Div (Mult (N 7) (N 4)) (N 2)))
+--23
+eval :: EA -> Int
+eval (Res (N a) (N b)) = a - b
+eval (Sum (N a) (N b)) = a + b
+eval (Mult(N a) (N b)) = a * b
+eval (Div (N a) (N b)) = div a b 
